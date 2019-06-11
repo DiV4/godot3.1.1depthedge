@@ -9,7 +9,7 @@ void vertex() {
 }
 
 void fragment() {
-	vec2 uv = SCREEN_UV; //for some reason UVs are upside down in the quad.
+	vec2 uv = SCREEN_UV;
 	
 	float depth = texture(DEPTH_TEXTURE, uv).r;
 	depth = depth * 2.0 - 1.0;
