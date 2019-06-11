@@ -24,6 +24,5 @@ void fragment() {
 	float dif = delta / delta2 / 1.05; //Getting a gray image with black and white edges.
 	dif = pow(dif, 25.0);
 	dif = (1.0 - clamp(dif, 0.5, 1.0)) * clamp(dif, 0.0, 0.1) * 10.0; //Turning the white edges black, combining.
-	float shift = floor(TIME * 4.0) / 4.0;
 	ALBEDO.rgb = vec3(dif) * texture(SCREEN_TEXTURE, uv).rgb * 2.0;
 }
