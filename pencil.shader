@@ -6,11 +6,10 @@ varying mat4 CAMERA;
 
 void vertex() {
 	PROJECTION_MATRIX = mat4(1.0); //Billboard code by BastiaanOlij.
-	VERTEX.xy *= 2.0;
 }
 
 void fragment() {
-	vec2 uv = vec2(UV.x, 1.0 - UV.y); //for some reason UVs are upside down in the quad.
+	vec2 uv = SCREEN_UV; //for some reason UVs are upside down in the quad.
 	
 	float depth = texture(DEPTH_TEXTURE, uv).r;
 	depth = depth * 2.0 - 1.0;
@@ -25,5 +24,6 @@ void fragment() {
 	float dif = delta / delta2 / 1.05; //Getting a gray image with black and white edges.
 	dif = pow(dif, 25.0);
 	dif = (1.0 - clamp(dif, 0.5, 1.0)) * clamp(dif, 0.0, 0.1) * 10.0; //Turning the white edges black, combining.
+	float shift = floor(TIME * 4.0) / 4.0;
 	ALBEDO.rgb = vec3(dif) * texture(SCREEN_TEXTURE, uv).rgb * 2.0;
 }
