@@ -4,7 +4,7 @@ render_mode skip_vertex_transform, unshaded; //Disabling lighting on the quad
 uniform float width : hint_range(0.1, 1.0) = 0.5; //This float sets the thickness of the lines
 
 void vertex() {
-	PROJECTION_MATRIX = mat4(1.0); //This line by BastiaanOlij makes the quad always look at the camera
+	PROJECTION_MATRIX = mat4(1.0); //This line makes the quad always look at the camera
 }
 
 void fragment() {
