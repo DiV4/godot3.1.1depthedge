@@ -16,8 +16,8 @@ void fragment() {
 	float depth2 = texture(DEPTH_TEXTURE, uv + vec2(width / 100.0)).r; //Sampling another texture at a certain offset
 	float z2 = -PROJECTION_MATRIX[3][2] / (depth2 + PROJECTION_MATRIX[2][2]); //Same matrix operation here
 	
-	float dif = z / z2 / 1.05; //Getting a gray image with black and white edges
-	dif = pow(dif, 25.0); //Increasing the contrast further
-	dif = (1.0 - clamp(dif, 0.5, 1.0)) * clamp(dif, 0.0, 0.1) * 10.0; //Clamping the most dark and light values, making the latter dark by substracting from 1.0
-	ALBEDO.rgb = vec3(dif) * texture(SCREEN_TEXTURE, uv).rgb * 2.0; //Multiplying the edges on the current frame and 2.0 to fix brightness
+	vec3 dif = vec3(z / z2 / 1.05); //Getting a gray image with black and white edges
+	dif = pow(dif, vec3(25.0)); //Increasing the contrast further
+	dif = min(dif, 0.1) * (1.0 - max(dif, 0.9)); //Extracting extreme values, turning white edges black by substraction from 1.0
+	ALBEDO.rgb = vec3(dif) * texture(SCREEN_TEXTURE, uv).rgb * 70.0; //Multiplying the edges on the current frame and 70.0 to fix brightness
 }
