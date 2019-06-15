@@ -18,6 +18,6 @@ void fragment() {
 	
 	vec3 dif = vec3(z / z2 / 1.05); //Getting a gray image with black and white edges
 	dif = pow(dif, vec3(25.0)); //Increasing the contrast further
-	dif = min(dif, 0.1) * (1.0 - max(dif, 0.9)); //Extracting extreme values, turning white edges black by substraction from 1.0
+	dif = min(dif, 0.1) * (1.0 - clamp(dif, 0.9, 1.0)); //Extracting extreme values, turning white edges black by substraction from 1.0
 	ALBEDO.rgb = vec3(dif) * texture(SCREEN_TEXTURE, uv).rgb * 70.0; //Multiplying the edges on the current frame and 70.0 to fix brightness
 }
