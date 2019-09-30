@@ -9,7 +9,7 @@ vec2 rand(vec2 p) { //Generating UV noise, based on post by Vortex_ from Shadert
 	}
 
 void vertex() {
-	PROJECTION_MATRIX = mat4(1.0); //This line makes the quad always look at the camera
+	POSITION = vec4(vec3(VERTEX.xy, -1.0), 1.0); // Keeps the quad in screen space.
 }
 
 void fragment() {
